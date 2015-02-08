@@ -1,5 +1,9 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_link, only: [:show, :edit, :update, :destroy] #created with the scaffold
+  before_filter :authenticate_user!, :except => [:index, :show] #authenticate everything except for index and show
+  #authenticate_user! is a helper provided by devise
+  #checks if a user is signed in before they hit anything, except for index and show. user does not have to be logged in to hit index and show.
+  #user must be logged in to hit everything except index and show.
 
   # GET /links
   # GET /links.json
@@ -14,7 +18,7 @@ class LinksController < ApplicationController
 
   # GET /links/new
   def new
-    @link = Link.new
+    @link = current_user.links.build #was Link.new - the user_id gets assigned to the link
   end
 
   # GET /links/1/edit
@@ -24,7 +28,7 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @link = Link.new(link_params)
+    @link = current_user.links.build(link_params) #was Link.new - the user_id gets assigned to the link
 
     respond_to do |format|
       if @link.save
