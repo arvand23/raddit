@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+
   devise_for :users
   resources :links do
     member do #?what is member do again?
@@ -7,6 +9,7 @@ Rails.application.routes.draw do
       put "like", to: "links#upvote" #controller action becomes like_links_path
       put "dislike", to: "links#downvote"
     end
+    resources :comments # ??? why??? comments
   end
 
 
