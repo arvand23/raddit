@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :links
+  resources :links do
+    member do #?what is member do again?
+      #the following is routes for voting
+      #?why are these all 'put'? how would i know their not post?
+      put "like", to: "links#upvote" #controller action becomes like_links_path
+      put "dislike", to: "links#downvote"
+    end
+  end
+
+
+
   root to: "links#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
