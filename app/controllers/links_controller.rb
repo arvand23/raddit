@@ -19,6 +19,12 @@ class LinksController < ApplicationController
   # GET /links/new
   def new
     @link = current_user.links.build #was Link.new - the user_id gets assigned to the link
+
+    #could be the following:
+    #@link = Link.new
+    #@link.user = current_user
+    #but you dont even need to assign the current user here because thats done under create
+
   end
 
   # GET /links/1/edit
@@ -28,7 +34,13 @@ class LinksController < ApplicationController
   # POST /links
   # POST /links.json
   def create
-    @link = current_user.links.build(link_params) #was Link.new - the user_id gets assigned to the link
+    @link = current_user.links.build(link_params) #was Link.new - the user_id gets assigned to the link #link_params would allow any userID to be passed,, rather than current_user
+
+    #.build is a synonym for .new. same ish.
+    #could also be the following:
+    #@link = Link.new(link_params)
+    #@link.user = current_user  OR  @link.user_id = current_user.id
+
 
     respond_to do |format|
       if @link.save
@@ -67,7 +79,7 @@ class LinksController < ApplicationController
 
   def upvote
     @link = Link.find(params[:id])#?what exactly does this do again?
-    @link.upvote_by current_user #?whats this upvote by method? where u get it?
+    @link.upvote_by current_user #?whats this upvote by method? where u get it?-- search by typing "t" on the github page of gem and search for it. its a method that has many synonyms that the gem defined.
     redirect_to :back #redirects user to same page their currently on
   end
 

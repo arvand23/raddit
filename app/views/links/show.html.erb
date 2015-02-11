@@ -13,6 +13,8 @@
 
 
 
+<h1><a href="<%= @link.url %>"><%= @link.title %></a><br> <small>Submitted by <%= @link.user.name %></small></h1>
+
 
 
 <div class="btn-group pull-right">
@@ -33,9 +35,9 @@
 </h3>
 
 <div id="comments">
-  <%= render :partial => @link.comments %> <!-- why @link.comments? -->
+  <%= render :partial => @link.comments %> <!-- why @link.comments? ... cuz comments belongs to links and @link is defined in the controller in the before_action-->
 </div>
-<%= simple_form_for [@link, Comment.new] do |f| %> <!-- form to create a new comment -->
+<%= simple_form_for [@link, Comment.new] do |f| %> <!-- form to create a new comment --> <!-- whats going on inside the [square brackets] -->
   <div class="field">
     <%= f.text_area :body, class: "form-control" %>
   </div>

@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       #the following is routes for voting
       #?why are these all 'put'? how would i know their not post?
       put "like", to: "links#upvote" #controller action becomes like_links_path
-      put "dislike", to: "links#downvote"
+      put "dislike", to: "links#downvote"  #these are by choice, if its post and in the view link it says method: :post, then all good
     end
-    resources :comments # ??? why??? comments
+    resources :comments # ??? why??? passes comment id and link id
   end
 
 

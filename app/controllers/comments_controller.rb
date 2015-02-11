@@ -3,9 +3,12 @@ class CommentsController < ApplicationController
 
   # POST /comments
   # POST /comments.json
-  def create
+  def create #explaing whats going on in the next 3 lines
     @link = Link.find(params[:link_id])
+    
     @comment = @link.comments.new(comment_params)
+    # @comment = Comment.new(comment_params)
+    # @comment.link = @link
     @comment.user = current_user #assigning comment to current user
 
     respond_to do |format|

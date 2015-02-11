@@ -11,9 +11,14 @@
     </tr>
   </thead>
 
+
+
+
   <tbody>
     <% @links.each do |link| %>
       <tr>
+        <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> by <%= link.user.name %></small>
+
         <td><%= link.title %></td>
         <td><%= link.url %></td>
         <td><%= link_to 'Show', link %></td>
